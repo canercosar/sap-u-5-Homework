@@ -1,0 +1,166 @@
+<mvc:View
+controllerName="sap.ui.demo.walkthrough.controller.InvoiceList"
+   xmlns="sap.m"
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns:core="sap.ui.core">
+
+	<IconTabBar>
+		<content>
+   
+   <Table mode="MultiSelect"
+    id="invoiceList"
+	
+      class="sapUiResponsiveMargin"
+      width="auto"
+      items="{
+        
+        path : 'invoice>/ProductCollection',
+			sorter : {
+				path : 'MainCategory',
+				group : true
+			}
+		}"
+      
+      >
+      <headerToolbar>
+         <Toolbar>
+            <Title text="Product ({invoice>/ProductCollectionStats/Counts/Total})"/>
+            <ToolbarSpacer/>
+
+
+            <SearchField 
+			width="35%" 
+			search="onFilterInvoices"/>
+         </Toolbar>
+      </headerToolbar>
+
+		<columns>
+	    <Column
+				hAlign="Center"
+				vAlign="Middle"
+				minScreenWidth="Small"
+				demandPopin="true">
+				
+				<Text text="{i18n>Visual}"/>
+			</Column>
+			<Column
+				hAlign="Center"
+				vAlign="Middle"
+				minScreenWidth="Small"
+				demandPopin="true"
+				width="5em">
+				<Text text="{i18n>columnQuantity}"/>
+			</Column>
+
+			<Column hAlign="Center" vAlign="Middle" >
+				<Text text="{i18n>columnName}"/>
+			</Column>
+
+			  <Column
+			  	hAlign="Center"
+				vAlign="Middle"
+				minScreenWidth="Desktop"
+				demandPopin="false">
+				<Text text="{i18n>SupplierName}"/>
+			</Column>
+			
+			<Column
+				hAlign="Center"
+				vAlign="Middle"
+				minScreenWidth="Small"
+				demandPopin="true">
+				<Text text="{i18n>columnStatus}"/>
+			</Column>
+			<Column
+				hAlign="Center"
+				vAlign="Middle"
+				minScreenWidth="Small"
+				demandPopin="false">
+				<Text text="{i18n>columnSupplier}"/>
+			</Column>
+
+			<Column
+				hAlign="Center"
+				vAlign="Middle"
+				minScreenWidth="Small"
+				demandPopin="false">
+				<Text text="{i18n>Dimensions}"/>
+			</Column>
+          
+			<Column
+				hAlign="Center" 
+				vAlign="Middle"
+				minScreenWidth="Small"
+				demandPopin="false">
+				<Text text="{i18n>KG}"/>
+			</Column>
+		
+			<Column
+				hAlign="End" vAlign="Middle">
+				<Text text="{i18n>columnPrice}"/>
+			</Column>
+		</columns>
+
+
+		<items>
+			<ColumnListItem
+				type="Navigation"
+				press=".onPress">
+				<cells>
+				
+				
+                    <Image ariaDetails="detailsActiveImage" src="{invoice>ProductPicUrl}" width="80px"/>
+
+
+					<ObjectNumber number="{invoice>Quantity}" emphasized="false"/>
+
+					<ObjectIdentifier 
+					
+					title="{invoice>Name}"
+					text="{invoice>ProductId}"
+					
+					/>
+
+					<Text text="{invoice>SupplierName}"/>
+
+					
+
+					<Text text="{
+						path: 'invoice>Status',
+						formatter: '.formatter.statusText'
+					}"/>
+
+					<Text text="{invoice>Category}"/>
+
+					<Text
+								text="{invoice>Width} x {invoice>Depth} x {invoice>Height} {invoice>DimUnit}" />
+                    
+					<ObjectNumber
+						number="{
+							parts: [{path: 'invoice>WeightMeasure'}, {path: 'vieww>/Integer'}],
+							type: 'class sap.ui.model.type.Integer',
+							formatOptions: {
+								showMeasure: false
+							}
+						}"
+						unit="{view>/Integer}"
+						state="{= ${invoice>WeightMeasure} > 1 ? 'Warning' : 'Success' }"/>
+
+					<ObjectNumber
+						number="{
+							parts: [{path: 'invoice>Price'}, {path: 'view>/currency'}],
+							type: 'sap.ui.model.type.Currency',
+							formatOptions: {
+								showMeasure: false
+							}
+						}"
+						unit="{view>/currency}"/>
+
+
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+			</content>
+	</IconTabBar>
+</mvc:View>

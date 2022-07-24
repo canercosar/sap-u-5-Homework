@@ -1,0 +1,131 @@
+<mvc:View
+controllerName="sap.ui.demo.walkthrough.controller.Detail"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+
+		title="{i18n>detailPageTitle}"
+        showNavButton="true"
+		navButtonPress=".onNavBack">
+
+		<ObjectHeader 
+		
+		
+		responsive="true"
+		fullScreenOptimized="true"
+		backgroundDesign="Transparent"
+		
+		icon="{invoice>ProductPicUrl}"
+		iconAlt="{invoice>Name}"
+		intro="{invoice>Description}"
+		title="{invoice>Name}"
+		
+		
+	number="{
+			parts:[{path:'invoice>Price'},{path:'invoice>CurrencyCode'}],
+			type: 'sap.ui.model.type.Currency',
+			formatOptions: {showMeasure: false}
+		}"
+		numberUnit="{invoice>CurrencyCode}"
+		showMarkers="true"
+			numberState="Success"
+		
+		class="sapUiResponsivePadding--header" 
+		
+		>
+		
+
+	<ObjectAttribute
+			title="ProductID"
+			text="{invoice>ProductId}"/>
+		<ObjectAttribute
+			title="Manufacturer"
+			text="{invoice>SupplierName}"
+			/>
+		<ObjectAttribute
+			title="Category"
+			text="{invoice>Category}"/>
+		<ObjectAttribute
+			title="Date Of Sale"
+			text="{invoice>DateOfSale}"/>
+		<ObjectAttribute 
+			title="Main Category"
+			text="{invoice>MainCategory}"/>
+			<ObjectAttribute 
+			title="Quantity"
+			text="{invoice>Quantity}"/>
+		<statuses>
+ 			<ObjectStatus
+				title="Status"
+				text="{invoice>Status}"
+				state="Success"/>
+		</statuses>
+
+		<headerContainer>
+			<IconTabBar
+				id="itb1"
+				selectedKey="key1"
+				upperCase="true"
+				class="sapUiResponsiveContentPadding">
+
+				<items>
+				<IconTabFilter
+					text="Info"
+					
+					key="key1">
+					<l:VerticalLayout
+						class="sapUiContentPadding"
+						width="50%">
+						<l:content>
+							<Image src="{invoice>ProductPicUrl}"/>
+
+						</l:content>
+					</l:VerticalLayout>
+					
+						<l:VerticalLayout
+						class="sapUiContentPadding"
+						width="50%">
+						<l:content>
+							<Title text="Dimension per unit;"/>
+							<Text text="{invoice>Width} x {invoice>Depth} x {invoice>Height} {invoice>DimUnit}"/>
+
+							<Title text="Weight per unit;"/>
+							<Text text="{invoice>WeightMeasure}  {invoice>WeightUnit}"/>
+
+							<Title text="Unit of Measurement (UOM);"/>
+							<Text text="{invoice>UoM}"/>
+
+						</l:content>
+					</l:VerticalLayout>
+			
+						
+					
+				</IconTabFilter>
+
+
+
+				<IconTabFilter
+					text="Detail"
+					
+					key="key2">
+					<l:VerticalLayout
+						class="sapUiContentPadding"
+						width="100%">
+						<l:content>
+							<Text text="{invoice>Description}"/>
+						</l:content>
+					</l:VerticalLayout>
+				</IconTabFilter>
+				
+
+				</items>
+			</IconTabBar>
+		</headerContainer>
+
+
+    	</ObjectHeader>
+			
+    </Page>
+
+</mvc:View>
